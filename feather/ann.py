@@ -1,4 +1,5 @@
 import numpy as np
+import json
 import aux_functions as af
 
 class ANN:
@@ -488,6 +489,29 @@ class ANN:
     		self.train_epoch_accuracies.append(train_mean_accuracy)
 
 
+    def save_net(self, file_path):
+        """
+        Saves weights and biases to file.
+        """
+    	serialized_weights = [w.tolist() for w \
+        in self.weights]
+    	serialized_biases = [b.tolist() for b \
+        in self.biases]
+    	params = {'weights':serialized_weights,\
+         'biases':serialized_biases}
+    	with open(file_path,'w') as f:
+    		f.write(json.dumps(params))
+
+
+    def load_net(self, file_path):
+        """
+        Loads weights and biases from file.
+        """
+    	with open(file_path,'r') as f:
+    		params = json.loads(f.read())
+    	#
+    	self.weights = np.array(params['weights'])
+    	self.biases = np.array(params['biases'])
 
 
 
