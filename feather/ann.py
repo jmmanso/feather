@@ -510,8 +510,8 @@ class ANN:
     	with open(file_path,'r') as f:
     		params = json.loads(f.read())
     	#
-    	self.weights = np.array(params['weights'])
-    	self.biases = np.array(params['biases'])
+    	self.weights = [np.array(w) for w in params['weights']]
+    	self.biases = [np.array(b) for b in params['biases']]
 
 
 
